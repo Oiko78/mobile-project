@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="?attr/materialCardViewStyle"
+    android:layout_width="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_trending"
+            android:layout_width="325dp"
+            android:layout_height="225dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            app:shapeAppearanceOverlay="?attr/shapeAppearanceCornerMedium"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+            <TextView
+                android:id="@+id/tv_trending_title"
+                style="?attr/textAppearanceTitleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="?attr/colorPrimary"
+                android:textStyle="bold"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias deleniti distinctio facere fuga pariatur recusandae voluptates! Atque autem ipsa nesciunt soluta. Eius et explicabo fugiat illo labore quibusdam quos veniam." />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="4dp" />
+
+            <TextView
+                android:id="@+id/tv_trending_extra_info"
+                style="?attr/textAppearanceBodyMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorOutline"
+                android:textSize="16sp"
+                tools:text="Release Date: 2021-09-17" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

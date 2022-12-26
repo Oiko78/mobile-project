@@ -8,6 +8,8 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 /.idea/vcs.xml
+/.idea/render.experimental.xml
+/.idea/deploymentTargetDropDown.xml
 
 .DS_Store
 /build
