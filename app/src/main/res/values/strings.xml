@@ -3,4 +3,5 @@
     <string name="trending_title">Trending Now</string>
     <string name="time_window_week">Week</string>
     <string name="time_window_day">Day</string>
+    <string name="popular_title">Popular</string>
 </resources>
