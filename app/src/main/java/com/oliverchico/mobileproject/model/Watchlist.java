@@ -1,24 +1,15 @@
 package com.oliverchico.mobileproject.model;
 
 public class Watchlist {
-    private int id;
+    private Integer id;
     private String title;
     private Status status;
 
-    public Watchlist(int id, String title, Status status) {
-        this.id = id;
-        this.title = title;
-        this.status = status;
-    }
-
-    public Watchlist() {
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -17,9 +17,12 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.snackbar.Snackbar;
 import com.oliverchico.mobileproject.R;
+import com.oliverchico.mobileproject.db.Database;
 import com.oliverchico.mobileproject.model.Configuration;
 import com.oliverchico.mobileproject.model.Genre;
 import com.oliverchico.mobileproject.model.Movie;
+import com.oliverchico.mobileproject.model.Status;
+import com.oliverchico.mobileproject.model.Watchlist;
 import com.oliverchico.mobileproject.tmdb.ConfigurationService;
 import com.oliverchico.mobileproject.tmdb.MovieService;
 
@@ -42,6 +45,8 @@ public class MovieDetailActivity extends AppCompatActivity {
     private TextView tvTitle, tvOverview, tvMiniInfo, tvReleaseDate, tvStatus;
     private Button btnWatchlist;
     private RatingBar rbVoteAverage;
+
+    private final Database db = new Database(this);
 
     public static Intent newIntent(Context context, Movie movie) {
         Intent intent = new Intent(context, MovieDetailActivity.class);
@@ -134,8 +139,30 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .load(backdropUrl)
                 .into(ivBackdrop);
 
-        btnWatchlist.setOnClickListener(v -> Snackbar.make(coordinatorLayout, "Added to watchlist", Snackbar.LENGTH_SHORT)
-                .show());
+        if (db.isWatchlistExist(movie.getId())) {
+            btnWatchlist.setText(R.string.view_watchlist_text);
+            btnWatchlist.setOnClickListener(v -> {
+                Intent intent = new Intent(this, WatchlistActivity.class);
+                startActivity(intent);
+            });
+        } else {
+            btnWatchlist.setText(R.string.add_to_watchlist_text);
+            btnWatchlist.setOnClickListener(v -> {
+                Watchlist watchlist = new Watchlist();
+                watchlist.setId(movie.getId());
+                watchlist.setTitle(movie.getTitle());
+                watchlist.setStatus(Status.PLAN_TO_WATCH);
+                db.insertWatchlist(watchlist);
+                btnWatchlist.setText(R.string.view_watchlist_text);
+                btnWatchlist.setOnClickListener(v1 -> {
+                    Intent intent = new Intent(this, WatchlistActivity.class);
+                    startActivity(intent);
+                });
+
+                Snackbar.make(coordinatorLayout, "Added to Watchlist", Snackbar.LENGTH_SHORT)
+                        .show();
+            });
+        }
     }
 
     private void setToolbar(Movie movie) {
@@ -144,12 +171,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         toolbar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.action_share) {
                 Toast.makeText(this, "Share", Toast.LENGTH_SHORT)
-                        .show();
-                return true;
-            }
-
-            if (item.getItemId() == R.id.action_add_to_watchlist) {
-                Toast.makeText(this, "Add to Watchlist", Toast.LENGTH_SHORT)
                         .show();
                 return true;
             }

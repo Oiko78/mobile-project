@@ -5,10 +5,11 @@
     <string name="time_window_day">Day</string>
     <string name="popular_title">Popular</string>
     <string name="movie_detail_menu_item_share">Share</string>
-    <string name="movie_detail_menu_item_watchlist">Add to Watchlist</string>
     <string name="rating_tile">Rating</string>
     <string name="status_title">Status</string>
     <string name="release_date_title">Release Date</string>
     <string name="watchlist_title">My Watchlist</string>
     <string name="watchlist">Watchlist</string>
+    <string name="view_watchlist_text">View Watchlist</string>
+    <string name="add_to_watchlist_text">Add to Watchlist</string>
 </resources>
