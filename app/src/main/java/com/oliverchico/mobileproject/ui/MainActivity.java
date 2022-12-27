@@ -1,7 +1,11 @@
 package com.oliverchico.mobileproject.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -64,6 +68,23 @@ public class MainActivity extends AppCompatActivity {
 
         fetchTrendingMovies(TimeWindow.WEEK);
         fetchPopularMovies();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.navigation_watchlist) {
+            // Navigate to watchlist activity
+            startActivity(new Intent(this, WatchlistActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void fetchPopularMovies() {

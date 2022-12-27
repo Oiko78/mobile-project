@@ -9,4 +9,6 @@
     <string name="rating_tile">Rating</string>
     <string name="status_title">Status</string>
     <string name="release_date_title">Release Date</string>
+    <string name="watchlist_title">My Watchlist</string>
+    <string name="watchlist">Watchlist</string>
 </resources>
