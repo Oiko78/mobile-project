@@ -1,4 +1,4 @@
-package com.oliverchico.mobileproject;
+package com.oliverchico.mobileproject.ui;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.oliverchico.mobileproject.R;
 import com.oliverchico.mobileproject.model.Configuration;
 import com.oliverchico.mobileproject.model.Movie;
 
@@ -62,6 +63,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
                     .load(configuration.getBaseUrl() + configuration.getPosterSizes().get(4) + movie.getPosterPath())
                     .error(R.drawable.ic_launcher_background)
                     .into(ivBackdrop);
+            itemView.setOnClickListener(v -> v.getContext().startActivity(MovieDetailActivity.newIntent(v.getContext(), movie)));
         }
     }
 }

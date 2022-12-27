@@ -1,4 +1,4 @@
-package com.oliverchico.mobileproject;
+package com.oliverchico.mobileproject.ui;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.oliverchico.mobileproject.R;
 import com.oliverchico.mobileproject.model.Configuration;
 import com.oliverchico.mobileproject.model.Movie;
 
@@ -20,7 +21,6 @@ import java.util.List;
 public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.ViewHolder> {
     private List<Movie> movies = new ArrayList<>();
     private Configuration.Image configuration;
-
 
     @SuppressLint("NotifyDataSetChanged")
     public void setMovies(List<Movie> movies) {
@@ -77,6 +77,7 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.ViewHo
                     .into(ivBackdrop);
             tvTitle.setText(movie.getTitle());
             tvExtraInfo.setText(String.format("Release Date: %s", movie.getReleaseDate()));
+            itemView.setOnClickListener(v -> v.getContext().startActivity(MovieDetailActivity.newIntent(v.getContext(), movie)));
         }
     }
 }

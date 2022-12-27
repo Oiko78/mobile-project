@@ -1,4 +1,4 @@
-package com.oliverchico.mobileproject;
+package com.oliverchico.mobileproject.ui;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.SnapHelper;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButtonToggleGroup;
+import com.oliverchico.mobileproject.R;
 import com.oliverchico.mobileproject.model.Configuration;
 import com.oliverchico.mobileproject.model.MovieResultsPage;
 import com.oliverchico.mobileproject.model.TimeWindow;
