@@ -128,9 +128,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         tvReleaseDate.setText(releaseDate.toString());
         tvStatus.setText(movie.getStatus());
         rbVoteAverage.setRating(movie.getVoteAverage() / 2);
-        String posterUrl = config.getBaseUrl() + config.getPosterSizes()
+        String posterUrl = config.getSecureBaseUrl() + config.getPosterSizes()
                 .get(4) + movie.getPosterPath();
-        String backdropUrl = config.getBaseUrl() + config.getBackdropSizes()
+        String backdropUrl = config.getSecureBaseUrl() + config.getBackdropSizes()
                 .get(2) + movie.getBackdropPath();
         Glide.with(this)
                 .load(posterUrl)
