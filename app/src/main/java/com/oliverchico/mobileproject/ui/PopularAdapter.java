@@ -60,7 +60,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
 
         public void bind(Movie movie) {
             Glide.with(itemView)
-                    .load(configuration.getBaseUrl() + configuration.getPosterSizes().get(4) + movie.getPosterPath())
+                    .load(configuration.getSecureBaseUrl() + configuration.getPosterSizes().get(4) + movie.getPosterPath())
                     .error(R.drawable.ic_launcher_background)
                     .into(ivBackdrop);
             itemView.setOnClickListener(v -> v.getContext().startActivity(MovieDetailActivity.newIntent(v.getContext(), movie)));
