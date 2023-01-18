@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -170,8 +169,11 @@ public class MovieDetailActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> finish());
         toolbar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.action_share) {
-                Toast.makeText(this, "Share", Toast.LENGTH_SHORT)
-                        .show();
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT,
+                        "https://www.themoviedb.org/movie/" + movie.getId());
+                intent.setType("text/plain");
+                startActivity(Intent.createChooser(intent, "Share to:"));
                 return true;
             }
             return false;
