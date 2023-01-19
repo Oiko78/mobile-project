@@ -16,7 +16,8 @@ import com.oliverchico.mobileproject.model.Status;
 import com.oliverchico.mobileproject.model.Watchlist;
 
 public class WatchlistActivity extends AppCompatActivity implements WatchlistAdapter.WatchlistAdapterListener {
-    private final WatchlistAdapter adapter = new WatchlistAdapter(new WatchlistAdapter.WatchlistDiff(), this);
+    private final WatchlistAdapter adapter = new WatchlistAdapter(
+            new WatchlistAdapter.WatchlistDiff(), this);
     private final Database db = new Database(this);
     private CoordinatorLayout coordinatorLayout;
 
@@ -34,7 +35,8 @@ public class WatchlistActivity extends AppCompatActivity implements WatchlistAda
 
 
         RecyclerView rvWatchlist = findViewById(R.id.rv_watchlist);
-        rvWatchlist.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        rvWatchlist.setLayoutManager(
+                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rvWatchlist.setAdapter(adapter);
 
         db.setListener(adapter::submitList);
@@ -42,23 +44,30 @@ public class WatchlistActivity extends AppCompatActivity implements WatchlistAda
 
     @Override
     public void onEdit(Watchlist watchlist) {
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
-        builder.setTitle("Edit Watchlist");
-
         final String[] status = {"Completed", "Watching", "Plan to Watch"};
-        builder.setSingleChoiceItems(status, watchlist.getStatus()
-                .ordinal(), (dialog, which) -> {
-            watchlist.setStatus(Status.values()[which]);
-            db.updateStatus(watchlist.getId(), Status.values()[which]);
-            dialog.dismiss();
-        });
+        final int[] checkedItem = {watchlist.getStatus().ordinal()};
+
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
+        builder.setTitle("Edit Watchlist")
+                .setSingleChoiceItems(status, checkedItem[0],
+                        (dialog, which) -> checkedItem[0] = which)
+                .setPositiveButton("Save", (dialog, which) -> {
+                    watchlist.setStatus(Status.values()[checkedItem[0]]);
+                    db.updateStatus(watchlist);
+                    Snackbar.make(coordinatorLayout, "Watchlist updated",
+                            Snackbar.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                })
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
         builder.show();
     }
 
     @Override
     public void onDelete(Watchlist watchlist) {
         db.deleteWatchlist(watchlist.getId());
-        Snackbar.make(coordinatorLayout, "Watchlist with title: " + watchlist.getTitle() + " is deleted.", Snackbar.LENGTH_LONG)
+        Snackbar.make(coordinatorLayout,
+                        "Watchlist with title: " + watchlist.getTitle() + " is deleted.",
+                        Snackbar.LENGTH_LONG)
                 .setAction("Undo", v -> db.insertWatchlist(watchlist))
                 .show();
     }

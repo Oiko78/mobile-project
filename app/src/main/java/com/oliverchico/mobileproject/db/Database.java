@@ -75,6 +75,10 @@ public class Database extends SQLiteOpenHelper {
         listener.onWatchlistChange(getAllWatchlist());
     }
 
+    public void updateStatus(Watchlist watchlist) {
+        updateStatus(watchlist.getId(), watchlist.getStatus());
+    }
+
     public void deleteWatchlist(Integer id) {
         db = this.getWritableDatabase();
         db.delete(TABLE_WATCHLIST, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
